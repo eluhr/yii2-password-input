@@ -14,6 +14,7 @@ $form = ActiveForm::begin();
 echo $form->field($model, 'password')->widget(PasswordInput::class, [
     'buttonLabelShow' => \Yii::t('password-input', 'Show'),
     'buttonLabelHide' => \Yii::t('password-input', 'Hide'),
+    'loadRulesFromModel' => false,
     'rules' => [
         [
             'text' => 'Must be at least 8 characters long',
