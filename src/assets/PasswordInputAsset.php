@@ -24,7 +24,6 @@ class PasswordInputAsset extends AssetBundle
     ];
 
     public $depends = [
-        JqueryAsset::class,
         BootstrapPluginAsset::class
     ];
 }
