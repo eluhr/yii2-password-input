@@ -57,7 +57,7 @@ $.fn.passwordInput = function (options) {
         }
         _input.trigger('toggleVisibility', {
             newVisibility: newVisibility,
-            oldVisibility, oldVisibility
+            oldVisibility: oldVisibility
         })
     })
 }
