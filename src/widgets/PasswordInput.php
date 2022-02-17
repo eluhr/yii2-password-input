@@ -5,6 +5,7 @@ namespace eluhr\passwordInput\widgets;
 use eluhr\passwordInput\assets\PasswordInputAsset;
 use yii\helpers\Html;
 use yii\helpers\Json;
+use yii\validators\EachValidator;
 use yii\validators\RegularExpressionValidator;
 use yii\widgets\InputWidget;
 
@@ -139,6 +140,11 @@ class PasswordInput extends InputWidget
                     $modelRules[] = [
                         'text' => $validator->message,
                         'pattern' => $validator->pattern
+                    ];
+                } else if ($validator instanceof EachValidator && $validator->rule[0] === 'match') {
+                    $modelRules[] = [
+                        'text' => $validator->rule['message'],
+                        'pattern' => $validator->rule['pattern']
                     ];
                 }
             }
