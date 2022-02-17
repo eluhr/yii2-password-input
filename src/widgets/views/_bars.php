@@ -12,7 +12,7 @@ use yii\helpers\Html;
 ?>
 <div class="password-rule-bars"><?php foreach ($rules as $ruleIndex => $rule) {
         if ($rule['showAsBar'] ?? true) {
-            echo Html::tag('div',  $rule['pattern'], [
+            echo Html::tag('div', '', [
                 'class' => [
                     'password-rule-bar',
                     PasswordInputHelper::patternMatches($value, $rule['pattern']) ? 'matches' : ''
