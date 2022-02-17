@@ -134,7 +134,7 @@ class PasswordInput extends InputWidget
         $rules = $this->rules;
         $modelRules = [];
         if ($this->loadRulesFromModel && !empty($this->model)) {
-            foreach ($this->model->getActiveValidators($this->attribute) as $validator) {
+            foreach ($this->model->getActiveValidators(Html::getAttributeName($this->attribute)) as $validator) {
                 if ($validator instanceof RegularExpressionValidator) {
                     $modelRules[] = [
                         'text' => $validator->message,
