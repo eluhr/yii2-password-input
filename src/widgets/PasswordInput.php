@@ -68,6 +68,17 @@ class PasswordInput extends InputWidget
     public $loadRulesFromModel = false;
 
     /**
+     * Layout of the widget component
+     *
+     * {input}: The actual input group
+     * {bars}: Rule bars. One per rule
+     * {summary}: List of rule texts
+     *
+     * @var string
+     */
+    public $layout = "{input}\n{bars}\n{summary}";
+
+    /**
      * @return void
      * @throws \yii\base\InvalidConfigException
      */
@@ -84,13 +95,7 @@ class PasswordInput extends InputWidget
     {
         $this->registerAssets();
         return $this->render('password-input', [
-            'input' => $this->renderInputHtml($this->showPasswordByDefault ? 'text' : 'password'),
-            'buttonLabelShow' => $this->buttonLabelShow,
-            'buttonLabelHide' => $this->buttonLabelHide,
-            'rules' => $this->rules(),
-            'value' => $this->getValue(),
-            'showPasswordByDefault' => $this->showPasswordByDefault,
-            'showShowPasswordButton' => $this->showShowPasswordButton
+            'content' => $this->content()
         ]);
     }
 
@@ -106,6 +111,7 @@ class PasswordInput extends InputWidget
 
     /**
      * This method merges given rules from $rules and model rules
+     *
      * @return array
      */
     protected function rules()
@@ -125,10 +131,34 @@ class PasswordInput extends InputWidget
         return array_merge($rules, $modelRules);
     }
 
+    protected function content()
+    {
+        $rules = $this->rules();
+        $value = $this->value();
+        $layoutTokens = [
+            '{input}' => $this->render('_input', [
+                'showShowPasswordButton' => $this->showShowPasswordButton,
+                'input' => $this->renderInputHtml($this->showPasswordByDefault ? 'text' : 'password'),
+                'showPasswordByDefault' => $this->showPasswordByDefault,
+                'buttonLabelHide' => $this->buttonLabelHide,
+                'buttonLabelShow' => $this->buttonLabelShow
+            ]),
+            '{bars}' => $this->render('_bars', [
+                'rules' => $rules,
+                'value' => $value
+            ]),
+            '{summary}' => $this->render('_summary', [
+                'rules' => $rules,
+                'value' => $value
+            ])
+        ];
+        return str_replace(array_keys($layoutTokens), array_values($layoutTokens), $this->layout);
+    }
+
     /**
      * @return array|string|null
      */
-    protected function getValue()
+    protected function value()
     {
         if ($this->hasModel()) {
             return Html::getAttributeValue($this->model, $this->attribute);

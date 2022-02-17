@@ -10,7 +10,14 @@ namespace eluhr\passwordInput\helpers;
 class PasswordInputHelper
 {
     /**
-     * Checks if a given string matches with a given pattern
+     * Matches cache
+     *
+     * @var array
+     */
+    protected static $_matches = [];
+
+    /**
+     * Checks if a given string matches with a given pattern and caches it in a static variable
      *
      * @param string $text
      * @param string $pattern
@@ -18,6 +25,10 @@ class PasswordInputHelper
      */
     public static function patternMatches(string $text, string $pattern): bool
     {
-        return preg_match($pattern, $text) === 1;
+        $index = md5($pattern . $text);
+        if (!isset(self::$_matches[$index])) {
+            self::$_matches[$index] = preg_match($pattern, $text) === 1;
+        }
+        return self::$_matches[$index];
     }
 }

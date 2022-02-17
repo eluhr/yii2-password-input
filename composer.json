@@ -1,24 +1,24 @@
 {
-    "name": "eluhr/yii2-password-input",
-    "description": "Password Input for Yii2",
-    "minimum-stability": "stable",
-    "keywords": [
-        "yii2",
-        "filefly"
-    ],
-    "license": "BSD-3-Clause",
-    "authors": [
-        {
-            "name": "Elias Luhr",
-            "email": "elias.luhr@gmail.com"
-        }
-    ],
-    "require": {
-        "yiisoft/yii2": "^2.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "eluhr\\passwordInput\\": "src"
-        }
+  "name": "eluhr/yii2-password-input",
+  "description": "Password Input for Yii2",
+  "minimum-stability": "stable",
+  "keywords": [
+    "yii2",
+    "password-input"
+  ],
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Elias Luhr",
+      "email": "elias.luhr@gmail.com"
     }
+  ],
+  "require": {
+    "yiisoft/yii2": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "eluhr\\passwordInput\\": "src"
+    }
+  }
 }

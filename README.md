@@ -1,10 +1,13 @@
 # Yii2 Password Input
 
+### Installation
+
 ```bash
 composer require eluhr/yii2-password-input
 ```
 
-Example usage
+### Example usage
+
 ```php
 <?php
 use yii\helpers\Html;
@@ -14,6 +17,7 @@ $form = ActiveForm::begin();
 echo $form->field($model, 'password')->widget(PasswordInput::class, [
     'buttonLabelShow' => \Yii::t('password-input', 'Show'),
     'buttonLabelHide' => \Yii::t('password-input', 'Hide'),
+    'layout' => "{input}\n{bars}\n{summary}",
     'loadRulesFromModel' => false,
     'rules' => [
         [
