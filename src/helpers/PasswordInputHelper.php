@@ -19,11 +19,11 @@ class PasswordInputHelper
     /**
      * Checks if a given string matches with a given pattern and caches it in a static variable
      *
-     * @param string $text
+     * @param string|null $text
      * @param string $pattern
      * @return bool
      */
-    public static function patternMatches(string $text, string $pattern): bool
+    public static function patternMatches($text, string $pattern): bool
     {
         $index = md5($pattern . $text);
         if (!isset(self::$_matches[$index])) {
