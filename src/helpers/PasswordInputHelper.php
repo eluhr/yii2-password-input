@@ -10,7 +10,7 @@ namespace eluhr\passwordInput\helpers;
 class PasswordInputHelper
 {
     /**
-     * Checks if a given string matches with a given pattenr
+     * Checks if a given string matches with a given pattern
      *
      * @param string $text
      * @param string $pattern
