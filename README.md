@@ -12,6 +12,8 @@ use yii\widgets\ActiveForm;
 
 $form = ActiveForm::begin();
 echo $form->field($model, 'password')->widget(PasswordInput::class, [
+    'buttonLabelShow' => \Yii::t('password-input', 'Show'),
+    'buttonLabelHide' => \Yii::t('password-input', 'Hide'),
     'rules' => [
         [
             'text' => 'Must be at least 8 characters long',
@@ -21,7 +23,9 @@ echo $form->field($model, 'password')->widget(PasswordInput::class, [
             'text' => 'Must include at least one number',
             'pattern' => '/\d+/'
         ]
-    ]
+    ],
+    'showPasswordByDefault' => false,
+    'showShowPasswordButton' => true
 ]);
 echo Html::submitButton();
 ActiveForm::end();
