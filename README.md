@@ -1,0 +1,29 @@
+# Yii2 Password Input
+
+```bash
+composer require eluhr/yii2-password-input
+```
+
+Example usage
+```php
+<?php
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
+$form = ActiveForm::begin();
+echo $form->field($model, 'password')->widget(PasswordInput::class, [
+    'rules' => [
+        [
+            'text' => 'Must be at least 8 characters long',
+            'pattern' => '/[0-9a-zA-Z]{8,}/'
+        ],
+        [
+            'text' => 'Must include at least one number',
+            'pattern' => '/\d+/'
+        ]
+    ]
+]);
+echo Html::submitButton();
+ActiveForm::end();
+?>
+```
