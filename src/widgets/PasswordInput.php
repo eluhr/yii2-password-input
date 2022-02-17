@@ -17,7 +17,19 @@ class PasswordInput extends InputWidget
 {
 
     /**
+     * These rules are not used in any form in model validation.
+     * They are used exclusively in the display of this widget.
+     *
      * List of patterns
+     *
+     * ```php
+     *  [
+     *      [
+     *          'text' => 'Must include at least one number',
+     *          'pattern' => '/\d+/'
+     *      ]
+     *  ]
+     * ```
      *
      * @var array
      */
@@ -93,6 +105,7 @@ class PasswordInput extends InputWidget
     }
 
     /**
+     * This method merges given rules from $rules and model rules
      * @return array
      */
     protected function rules()
