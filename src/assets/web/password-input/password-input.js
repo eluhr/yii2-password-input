@@ -1,4 +1,4 @@
-$.fn.passwordInput = function(options) {
+$.fn.passwordInput = function (options) {
     options = options || {};
     var _input = $(this);
     var _widget = _input.closest('.password-input-widget');
@@ -7,7 +7,7 @@ $.fn.passwordInput = function(options) {
     var _ruleTexts = _widget.find('.password-rule-texts');
     var _rules = options.rules || []
 
-    _input.on("input", function() {
+    _input.on("input", function () {
         var inputValue = $(this).val();
         for (var ruleIndex = 0; ruleIndex < _rules.length; ruleIndex++) {
             checkBar(ruleIndex, inputValue)
@@ -42,7 +42,7 @@ $.fn.passwordInput = function(options) {
         return text.match(regEx) !== null
     }
 
-    _button.on("click", function() {
+    _button.on("click", function () {
         var button = $(this);
         var oldVisibility = button.data("password-visible");
         var newVisibility = oldVisibility ? 0 : 1;

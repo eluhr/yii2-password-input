@@ -3,11 +3,9 @@
 namespace eluhr\passwordInput\widgets;
 
 use eluhr\passwordInput\assets\PasswordInputAsset;
-use yii\bootstrap\BootstrapAsset;
-use yii\bootstrap\BootstrapPluginAsset;
 use yii\helpers\Html;
 use yii\helpers\Json;
-use yii\web\JqueryAsset;
+use yii\validators\RegularExpressionValidator;
 use yii\widgets\InputWidget;
 
 /**
@@ -20,18 +18,21 @@ class PasswordInput extends InputWidget
 
     /**
      * List of patterns
+     *
      * @var array
      */
     public $rules = [];
 
     /**
      * Addon button value when password is hidden
+     *
      * @var string
      */
     public $buttonLabelShow = 'Show';
 
     /**
      * Addon button value when password is visible
+     *
      * @var string
      */
     public $buttonLabelHide = 'Hide';
@@ -46,12 +47,27 @@ class PasswordInput extends InputWidget
      */
     public $showShowPasswordButton = true;
 
+    /**
+     * Load rules based on yii\validators\RegularExpressionValidator from model rules.
+     * This only works when you use this input with the $model and $attribute value
+     *
+     * @var bool
+     */
+    public $loadRulesFromModel = false;
+
+    /**
+     * @return void
+     * @throws \yii\base\InvalidConfigException
+     */
     public function init()
     {
         parent::init();
-        Html::addCssClass($this->options,'password-input');
+        Html::addCssClass($this->options, 'password-input');
     }
 
+    /**
+     * @return string
+     */
     public function run()
     {
         $this->registerAssets();
@@ -59,24 +75,48 @@ class PasswordInput extends InputWidget
             'input' => $this->renderInputHtml($this->showPasswordByDefault ? 'text' : 'password'),
             'buttonLabelShow' => $this->buttonLabelShow,
             'buttonLabelHide' => $this->buttonLabelHide,
-            'rules' => $this->rules,
+            'rules' => $this->rules(),
             'value' => $this->getValue(),
             'showPasswordByDefault' => $this->showPasswordByDefault,
             'showShowPasswordButton' => $this->showShowPasswordButton
         ]);
     }
 
+    /**
+     * @return void
+     */
     protected function registerAssets()
     {
         PasswordInputAsset::register($this->view);
-        $rules = Json::encode($this->rules);
+        $rules = Json::encode($this->rules());
         $this->view->registerJs("$('#$this->id input.password-input').passwordInput({rules: $rules})");
+    }
+
+    /**
+     * @return array
+     */
+    protected function rules()
+    {
+        $rules = $this->rules;
+        $modelRules = [];
+        if ($this->loadRulesFromModel && !empty($this->model)) {
+            foreach ($this->model->getActiveValidators($this->attribute) as $validator) {
+                if ($validator instanceof RegularExpressionValidator) {
+                    $modelRules[] = [
+                        'text' => $validator->message,
+                        'pattern' => $validator->pattern
+                    ];
+                }
+            }
+        }
+        return array_merge($rules, $modelRules);
     }
 
     /**
      * @return array|string|null
      */
-    protected function getValue() {
+    protected function getValue()
+    {
         if ($this->hasModel()) {
             return Html::getAttributeValue($this->model, $this->attribute);
         }
