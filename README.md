@@ -49,3 +49,7 @@ echo Html::submitButton();
 ActiveForm::end();
 ?>
 ```
+
+### Configuration
+
+For configuration options please refer to the [Wiki](https://github.com/eluhr/yii2-password-input/wiki/Configuration)
