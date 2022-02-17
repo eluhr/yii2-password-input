@@ -8,6 +8,9 @@ composer require eluhr/yii2-password-input
 
 ### Example usage
 
+![Example Password Input Loop](https://media.giphy.com/media/dN6Pp1RS0YwDgyjLMy/giphy.gif)
+
+
 ```php
 <?php
 use yii\helpers\Html;
