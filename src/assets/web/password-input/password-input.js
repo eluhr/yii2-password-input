@@ -42,7 +42,8 @@ $.fn.passwordInput = function (options) {
         return text.match(regEx) !== null
     }
 
-    _button.on("click", function () {
+    _button.on("click", function (event) {
+        event.preventDefault();
         var button = $(this)
         var oldVisibility = button.data("password-visible")
         var newVisibility = oldVisibility ? 0 : 1
