@@ -11,6 +11,7 @@ use yii\helpers\Html;
  * @var string $buttonLabelHide
  * @var bool $showPasswordByDefault
  * @var bool $showShowPasswordButton
+ * @var array $buttonOptions
  */
 
 if ($showShowPasswordButton): ?>
@@ -19,14 +20,7 @@ if ($showShowPasswordButton): ?>
 <?php echo $input ?>
 <?php if ($showShowPasswordButton): ?>
     <span class="input-group-btn"><?php
-        echo Html::button($showPasswordByDefault ? $buttonLabelHide : $buttonLabelShow, [
-            'class' => 'btn btn-default password-input-toggle-button',
-            'data' => [
-                'password-visible' => $showPasswordByDefault ? '1' : '0',
-                'hidden-text' => $buttonLabelShow,
-                'visible-text' => $buttonLabelHide
-            ]
-        ]);
+        echo Html::button($showPasswordByDefault ? $buttonLabelHide : $buttonLabelShow, $buttonOptions);
         ?></span>
 <?php endif; ?>
 <?php if ($showShowPasswordButton): ?>

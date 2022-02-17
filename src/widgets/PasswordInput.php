@@ -81,13 +81,26 @@ class PasswordInput extends InputWidget
     public $layout = "{input}\n{bars}\n{summary}";
 
     /**
+     * Html attributes for toggle button
+     *
+     * @var string[]
+     */
+    public $buttonOptions = [];
+
+    /**
      * @return void
      * @throws \yii\base\InvalidConfigException
      */
     public function init()
     {
         parent::init();
-        Html::addCssClass($this->options, 'password-input');
+        Html::addCssClass($this->options, ['password-input', 'form-control']);
+        Html::addCssClass($this->buttonOptions, ['btn', 'password-input-toggle-button']);
+        $this->buttonOptions['data'] = [
+            'password-visible' => $this->showPasswordByDefault ? '1' : '0',
+            'hidden-text' => $this->buttonLabelShow,
+            'visible-text' => $this->buttonLabelHide
+        ];
     }
 
     /**
@@ -143,7 +156,8 @@ class PasswordInput extends InputWidget
                 'input' => $this->renderInputHtml($this->showPasswordByDefault ? 'text' : 'password'),
                 'showPasswordByDefault' => $this->showPasswordByDefault,
                 'buttonLabelHide' => $this->buttonLabelHide,
-                'buttonLabelShow' => $this->buttonLabelShow
+                'buttonLabelShow' => $this->buttonLabelShow,
+                'buttonOptions' => $this->buttonOptions
             ]),
             '{bars}' => $this->render('_bars', [
                 'rules' => $rules,
