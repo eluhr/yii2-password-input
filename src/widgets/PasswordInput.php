@@ -7,6 +7,7 @@ use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\validators\EachValidator;
 use yii\validators\RegularExpressionValidator;
+use yii\validators\Validator;
 use yii\widgets\InputWidget;
 
 /**
@@ -141,7 +142,7 @@ class PasswordInput extends InputWidget
                         'text' => $validator->message,
                         'pattern' => $validator->pattern
                     ];
-                } else if ($validator instanceof EachValidator && $validator->rule[0] === 'match') {
+                } else if ($validator instanceof EachValidator && $validator->rule[0] === array_search(RegularExpressionValidator::class, Validator::$builtInValidators, true)) {
                     $modelRules[] = [
                         'text' => $validator->rule['message'],
                         'pattern' => $validator->rule['pattern']
