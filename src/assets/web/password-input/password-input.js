@@ -17,7 +17,7 @@ $.fn.passwordInput = function (options) {
 
     function checkBar(ruleIndex, inputValue) {
         var rule = _rules[ruleIndex]
-        var ruleBar = _ruleBars.find('.password-rule-bar:nth-of-type(' + (ruleIndex + 1) + ')');
+        var ruleBar = _ruleBars.find('.password-rule-bar[data-rule-index="' + ruleIndex + '"]');
         var isValid = patternMatches(inputValue, rule.pattern)
         if (isValid) {
             ruleBar.addClass('matches');
@@ -28,7 +28,7 @@ $.fn.passwordInput = function (options) {
 
     function checkText(ruleIndex, inputValue) {
         var rule = _rules[ruleIndex]
-        var ruleText = _ruleTexts.find('.password-rule-text:nth-of-type(' + (ruleIndex + 1) + ')');
+        var ruleText = _ruleTexts.find('.password-rule-text[data-rule-index="' + ruleIndex + '"]');
         var isValid = patternMatches(inputValue, rule.pattern)
         if (isValid) {
             ruleText.addClass('matches');

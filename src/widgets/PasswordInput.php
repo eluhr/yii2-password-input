@@ -26,7 +26,9 @@ class PasswordInput extends InputWidget
      *  [
      *      [
      *          'text' => 'Must include at least one number',
-     *          'pattern' => '/\d+/'
+     *          'pattern' => '/\d+/',
+     *          'showInSummary' => true, // If the value is not set at all, it will be displayed
+     *          'showAsBar' => false // If the value is not set at all, it will be displayed
      *      ]
      *  ]
      * ```

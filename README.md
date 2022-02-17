@@ -27,6 +27,16 @@ echo $form->field($model, 'password')->widget(PasswordInput::class, [
         [
             'text' => 'Must include at least one number',
             'pattern' => '/\d+/'
+        ],
+        [
+            'text' => 'Must contain the letter "a"',
+            'pattern' => '/a/',
+            'showAsBar' => false
+        ],
+        [
+            'text' => 'Must not be empty',
+            'pattern' => '/.+/',
+            'showInSummary' => false
         ]
     ],
     'showPasswordByDefault' => false,

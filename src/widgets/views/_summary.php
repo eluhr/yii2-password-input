@@ -11,14 +11,16 @@ use yii\helpers\Html;
 
 ?>
 <ul class="password-rule-texts"><?php foreach ($rules as $ruleIndex => $rule) {
-        echo Html::tag('li', $rule['text'], [
-            'class' => [
-                'password-rule-text',
-                PasswordInputHelper::patternMatches($value, $rule['pattern']) ? 'matches' : ''
-            ],
-            'data' => [
-                'rule-index' => $ruleIndex
-            ]
-        ]);
+        if ($rule['showInSummary'] ?? true) {
+            echo Html::tag('li', $rule['text'], [
+                'class' => [
+                    'password-rule-text',
+                    PasswordInputHelper::patternMatches($value, $rule['pattern']) ? 'matches' : ''
+                ],
+                'data' => [
+                    'rule-index' => $ruleIndex
+                ]
+            ]);
+        }
     } ?>
 </ul>
