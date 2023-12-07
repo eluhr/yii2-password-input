@@ -23,11 +23,11 @@ class PasswordInputHelper
      * @param string $pattern
      * @return bool
      */
-    public static function patternMatches($text, string $pattern): bool
+    public static function patternMatches(?string $text, string $pattern): bool
     {
         $index = md5($pattern . $text);
         if (!isset(self::$_matches[$index])) {
-            self::$_matches[$index] = preg_match($pattern, $text) === 1;
+            self::$_matches[$index] = preg_match($pattern, (string)$text) === 1;
         }
         return self::$_matches[$index];
     }
