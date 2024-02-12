@@ -13,6 +13,7 @@ composer require eluhr/yii2-password-input
 
 ```php
 <?php
+use eluhr\passwordInput\widgets\PasswordInput;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
